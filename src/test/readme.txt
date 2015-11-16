@@ -1,0 +1,1 @@
+This folder contains generated performance tests: the Gatling Scala DSL and accompanying request bodies (for PUT and POSTS requests).
