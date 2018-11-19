@@ -10,11 +10,12 @@
     <name>Gatling Seed</name>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gatling.version>2.2.0-M3</gatling.version>
-        <gatling.maven.plugin.version>2.2.0-M2</gatling.maven.plugin.version>
-        <scala-maven-plugin.version>3.2.2</scala-maven-plugin.version>
-        <maven.exec.path>mvn</maven.exec.path>
+        <gatling.version>3.0.1</gatling.version>
+        <gatling-plugin.version>3.0.1</gatling-plugin.version>
+        <scala-maven-plugin.version>3.4.4</scala-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -24,20 +25,14 @@
             <version>${gatling.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
-            <scope>compile</scope>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>2.12.7</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
+            <version>2.6</version>
         </dependency>
     </dependencies>
 
@@ -66,18 +61,18 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Run with 'mvn clean gatling:execute' -->
-                <!-- Or, when multiple simulations present: 'mvn gatling:execute -Dgatling.simulationClass=simulations.<simulationClassName>' -->
+                <!-- Run with 'mvn clean gatling:test' -->
+                <!-- Or, when multiple simulations present: 'mvn gatling:test -Dgatling.simulationClass=simulations.<simulationClassName>' -->
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
-                <version>${gatling.maven.plugin.version}</version>
-                <configuration>
-                    <simulationsFolder>src/test/scala/simulations</simulationsFolder>
-                    <bodiesFolder>src/test/resources/request-bodies</bodiesFolder>
-                    <zincJvmArgs>
-                        <jvmArg>-Xss20M</jvmArg>
-                    </zincJvmArgs>
-                </configuration>
+                <version>${gatling-plugin.version}</version>
+                <!--<configuration>-->
+                    <!--<simulationsFolder>src/test/scala/simulations</simulationsFolder>-->
+                    <!--<bodiesFolder>src/test/resources/request-bodies</bodiesFolder>-->
+                    <!--<zincJvmArgs>-->
+                        <!--<jvmArg>-Xss20M</jvmArg>-->
+                    <!--</zincJvmArgs>-->
+                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>

@@ -2,11 +2,11 @@ package nl.jpoint.gatling
 
 import java.nio.file.Path
 
-import io.gatling.core.util.PathHelper._
+import io.gatling.commons.util.PathHelper._
 
 object PathHelper {
 
-	val recorderConfUrl: Path = getClass.getClassLoader.getResource("config/recorder.conf").toURI
+	val recorderConfUrl: Path = getClass.getClassLoader.getResource("config/recorder.conf")
 	val projectRootDir = recorderConfUrl.ancestor(4)
 	val mavenTargetDirectory = projectRootDir / "target"
 	val recorderOutputPath = mavenTargetDirectory / "recorder-output"

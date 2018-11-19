@@ -22,8 +22,8 @@ To record a test, perform the following steps:
 Executing a test
 ---
 To execute a test, perform:   
-```mvn clean gatling:execute```  
+```mvn clean gatling:test```  
   
 
 Or, when multiple simulations present:  
-```mvn gatling:execute -Dgatling.simulationClass=simulations.<simulationClassName>```
+```mvn gatling:test -Dgatling.simulationClass=simulations.<simulationClassName>```

@@ -1,7 +1,5 @@
-[
-  {
-    "har": "www.google.nl.har",
-    "recorderWhiteList": "(.*)www\\.google\\.nl(.+)",
-    "simulationClassName": "MyFirstGatlingSimulation"
-  }
-]
+{
+  "har": "www.google.nl.har",
+  "recorderWhiteList": "(.*)www\\.google\\.nl(.+)",
+  "simulationClassName": "MyFirstGatlingSimulation"
+}

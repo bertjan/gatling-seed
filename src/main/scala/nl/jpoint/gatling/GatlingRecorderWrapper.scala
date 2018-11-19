@@ -1,7 +1,6 @@
 package nl.jpoint.gatling
 
 import java.io.File
-import java.nio.file.{Paths, Files}
 import java.util
 
 import io.gatling.recorder.GatlingRecorder
@@ -16,8 +15,9 @@ object GatlingRecorderWrapper extends App {
 
     println("Using project root dir " + PathHelper.projectRootDir)
 
-    props.simulationOutputFolder(PathHelper.simulationOutputFolder)
-    props.bodiesFolder(PathHelper.simulationRequestBodiesFolder)
+    props.simulationsFolder(PathHelper.simulationOutputFolder)
+//    props.simulationOutputFolder(PathHelper.simulationOutputFolder)
+//    props.bodiesFolder(PathHelper.simulationRequestBodiesFolder)
     props.simulationClassName(simulationClassName)
     props.simulationPackage("simulations")
     props.mode(RecorderMode.Har)
@@ -51,23 +51,21 @@ object GatlingRecorderWrapper extends App {
 
   def startRecorderFromConfig(): Unit = {
     val configAsString = scala.io.Source.fromFile(PathHelper.gatlingImportConfig).getLines.mkString
-    val configItems : List[Map[String,String]] = JSON.parseFull(configAsString).get.asInstanceOf[List[Map[String,String]]]
+    val configItem : Map[String,String] = JSON.parseFull(configAsString).get.asInstanceOf[Map[String,String]]
 
-    for (configItem <- configItems) {
-      def har = configItem.get("har").get
-      def recorderWhiteList = configItem.get(GatlingProperties.RECORDER_WHITE_LIST).get
-      def simulationClassName = configItem.get(GatlingProperties.SIMULATION_CLASS_NAME).get
+    def har = configItem.get("har").get
+    def recorderWhiteList = configItem.get(GatlingProperties.RECORDER_WHITE_LIST).get
+    def simulationClassName = configItem.get(GatlingProperties.SIMULATION_CLASS_NAME).get
 
-      println("Got config:")
-      println(" har='" + har + "'")
-      println(" recorderWhiteList='" + recorderWhiteList + "'")
-      println(" simulationClassName='" + simulationClassName + "'")
+    println("Got config:")
+    println(" har='" + har + "'")
+    println(" recorderWhiteList='" + recorderWhiteList + "'")
+    println(" simulationClassName='" + simulationClassName + "'")
 
-      var props = new RecorderPropertiesBuilder
-      props.harFilePath(PathHelper.harInputDirectory + "/" + har)
-      props.whitelist(util.Arrays.asList(recorderWhiteList))
-      GatlingRecorderWrapper.startRecorder(props, simulationClassName)
-    }
+    var props = new RecorderPropertiesBuilder
+    props.harFilePath(PathHelper.harInputDirectory + "/" + har)
+    props.whitelist(util.Arrays.asList(recorderWhiteList))
+    GatlingRecorderWrapper.startRecorder(props, simulationClassName)
 
   }
 
