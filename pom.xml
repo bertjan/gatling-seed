@@ -66,13 +66,9 @@
                 <groupId>io.gatling</groupId>
                 <artifactId>gatling-maven-plugin</artifactId>
                 <version>${gatling-plugin.version}</version>
-                <!--<configuration>-->
-                    <!--<simulationsFolder>src/test/scala/simulations</simulationsFolder>-->
-                    <!--<bodiesFolder>src/test/resources/request-bodies</bodiesFolder>-->
-                    <!--<zincJvmArgs>-->
-                        <!--<jvmArg>-Xss20M</jvmArg>-->
-                    <!--</zincJvmArgs>-->
-                <!--</configuration>-->
+                <configuration>
+                    <simulationsFolder>src/test/scala/simulations</simulationsFolder>
+                </configuration>
             </plugin>
         </plugins>
     </build>
