@@ -16,8 +16,7 @@ object GatlingRecorderWrapper extends App {
     println("Using project root dir " + PathHelper.projectRootDir)
 
     props.simulationsFolder(PathHelper.simulationOutputFolder)
-//    props.simulationOutputFolder(PathHelper.simulationOutputFolder)
-//    props.bodiesFolder(PathHelper.simulationRequestBodiesFolder)
+    props.resourcesFolder(PathHelper.requestBodiesTargetFolder)
     props.simulationClassName(simulationClassName)
     props.simulationPackage("simulations")
     props.mode(RecorderMode.Har)
