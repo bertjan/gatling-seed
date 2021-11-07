@@ -19,7 +19,9 @@ class GoogleSimulation extends Simulation {
       http("Perform Google search on 'gatling'.")
         .get("/search?q=gatling")
         .check(status.is(200))
-        .check(regex("<title>gatling - Google zoeken</title>"))
+//        .check( bodyString.saveAs( "RESPONSE_DATA" ) ))
+//        .exec( session => { println("Response: " + session("RESPONSE_DATA")); session }
+        .check(regex("<title>Voordat je verdergaat naar Google Zoeken</title>"))
     )
 
   setUp(myFirstScenario.inject(rampUsers(1) during (5 seconds))).protocols(httpProtocol)
