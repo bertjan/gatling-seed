@@ -1,17 +1,16 @@
 package nl.jpoint.gatling
 
-import java.io.File
-import java.util
-
 import io.gatling.recorder.GatlingRecorder
 import io.gatling.recorder.config.{RecorderMode, RecorderPropertiesBuilder}
 import org.apache.commons.io.FileUtils
 
-import scala.util.parsing.json.JSON
+import java.io.{File, FileInputStream}
+import java.util
+import java.util.Properties
 
 object GatlingRecorderWrapper extends App {
 
-  def startRecorder(props: RecorderPropertiesBuilder, simulationClassName : String) {
+  def startRecorder(props: RecorderPropertiesBuilder, simulationClassName : String): Unit = {
 
     println("Using project root dir " + PathHelper.projectRootDir)
 
@@ -49,12 +48,12 @@ object GatlingRecorderWrapper extends App {
   }
 
   def startRecorderFromConfig(): Unit = {
-    val configAsString = scala.io.Source.fromFile(PathHelper.gatlingImportConfig).getLines.mkString
-    val configItem : Map[String,String] = JSON.parseFull(configAsString).get.asInstanceOf[Map[String,String]]
+    val properties: Properties = new Properties()
+    properties.load(new FileInputStream(PathHelper.gatlingImportConfig));
 
-    def har = configItem.get("har").get
-    def recorderWhiteList = configItem.get(GatlingProperties.RECORDER_WHITE_LIST).get
-    def simulationClassName = configItem.get(GatlingProperties.SIMULATION_CLASS_NAME).get
+    def har = properties.getProperty("har")
+    def recorderWhiteList = properties.getProperty(GatlingProperties.RECORDER_WHITE_LIST)
+    def simulationClassName = properties.getProperty(GatlingProperties.SIMULATION_CLASS_NAME)
 
     println("Got config:")
     println(" har='" + har + "'")

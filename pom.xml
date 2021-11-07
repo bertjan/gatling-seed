@@ -13,9 +13,9 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <gatling.version>3.0.1</gatling.version>
-        <gatling-plugin.version>3.0.1</gatling-plugin.version>
-        <scala-maven-plugin.version>3.4.4</scala-maven-plugin.version>
+        <gatling.version>3.6.1</gatling.version>
+        <gatling-plugin.version>3.1.2</gatling-plugin.version>
+        <scala-maven-plugin.version>4.4.1</scala-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -23,11 +23,6 @@
             <groupId>io.gatling.highcharts</groupId>
             <artifactId>gatling-charts-highcharts</artifactId>
             <version>${gatling.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-            <version>2.12.7</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -55,8 +50,21 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
-                            <!--<goal>testCompile</goal>-->
+                            <goal>testCompile</goal>
                         </goals>
+                        <configuration>
+                            <jvmArgs>
+                                <jvmArg>-Xss100M</jvmArg>
+                            </jvmArgs>
+                            <args>
+                                <arg>-target:jvm-1.8</arg>
+                                <arg>-deprecation</arg>
+                                <arg>-feature</arg>
+                                <arg>-unchecked</arg>
+                                <arg>-language:implicitConversions</arg>
+                                <arg>-language:postfixOps</arg>
+                            </args>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

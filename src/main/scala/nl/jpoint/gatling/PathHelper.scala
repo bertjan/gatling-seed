@@ -1,12 +1,13 @@
 package nl.jpoint.gatling
 
-import java.nio.file.Path
+import io.gatling.commons.shared.unstable.util.PathHelper.RichPath
 
-import io.gatling.commons.util.PathHelper._
+import java.nio.file.{Path, Paths}
+
 
 object PathHelper {
 
-	val recorderConfUrl: Path = getClass.getClassLoader.getResource("config/recorder.conf")
+	val recorderConfUrl: Path = Paths.get(ClassLoader.getSystemResource("config/recorder.conf").toURI)
 	val projectRootDir = recorderConfUrl.ancestor(4)
 	val mavenTargetDirectory = projectRootDir / "target"
 	val recorderOutputPath = mavenTargetDirectory / "recorder-output"
@@ -17,7 +18,7 @@ object PathHelper {
 	val mavenResourcesDirectory = projectRootDir / "src" / "main" / "resources"
 	val mavenTestResourcesDirectory = projectRootDir / "src" / "test" / "resources"
 	val harInputDirectory = (mavenResourcesDirectory / "har" ).toString
-	val gatlingImportConfig = (mavenResourcesDirectory / "config" / "gatling-recorder.json").toString
+	val gatlingImportConfig = (mavenResourcesDirectory / "config" / "gatling-recorder.properties").toString
   val simulationTargetFolder = (mavenTestSourcesDirectory).toString
   val requestBodiesTargetFolder = (mavenTestResourcesDirectory / "request-bodies").toString
 
